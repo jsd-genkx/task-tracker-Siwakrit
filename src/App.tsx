@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import TaskForm from "./components/TaskForm";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export interface Task {
+    id: number;
+    text: string;
 }
 
-export default App
+function App() {
+    const [tasks, setTasks] = useState<Task[]>([]);
+
+    //Function to add a new task to the task list
+    const handleAddTask = (newTask: Task) => {
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+    };
+
+  return (
+    <div className="max-w-md mx-auto mt-10 p-4 bg-gray-100 rounded-lg shadow-md">
+    <h1 className="text-2xl font-bold text-center mb-4">Task Tracker</h1>
+    <TaskForm onAddTask={handleAddTask} />
+    {/* Task list display will be added in Part 2  */}
+    </div>
+
+  )
+
+
+}
+
+export default App;
